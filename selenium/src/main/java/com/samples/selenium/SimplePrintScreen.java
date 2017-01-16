@@ -27,12 +27,12 @@ public class SimplePrintScreen {
 	public static void main(String[] args) throws Exception {
 		// http://www.seleniumhq.org/download/ take java jars include in driver
 		// https://sites.google.com/a/chromium.org/chromedriver/downloads
-		System.setProperty("webdriver.chrome.driver","C://Users//srinivaas//Downloads//chromedriver_win32//chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver","chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
-		driver.get("https://mdl.vsc3.newyorklife.com/VSCRegWebApp/login");
+		driver.get("https://sample url");
 		printScreen(driver,"login");
-		driver.findElement(By.xpath("//input[@name='userName']")).sendKeys("T000008626");
-		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("T000008626");
+		driver.findElement(By.xpath("//input[@name='userName']")).sendKeys("un");
+		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("pw");
 		driver.findElement(By.id("vscLoginFormSubmit")).click();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		Thread.sleep(10000);
@@ -46,7 +46,7 @@ public class SimplePrintScreen {
 	}
 
 	public static void click(WebDriver driver, String policy) throws Exception {
-		driver.get("https://mdl.vsc3.newyorklife.com/VSCWebApp/servlet/com.nyl.vscii.policyserver.PolicyServerServlet?frompv=1&amp;contractNo="+ policy);
+		driver.get("sample="+ policy);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		Thread.sleep(10000);
 		printScreen(driver, policy);
