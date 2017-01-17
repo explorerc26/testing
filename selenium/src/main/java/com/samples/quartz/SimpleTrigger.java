@@ -8,16 +8,18 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
+import com.samples.selenium.AccessAccount;
+
 public class SimpleTrigger {
 	public static void main(String[] args) throws Exception {
 
-		JobDetail job = JobBuilder.newJob(HelloJob.class).withIdentity("dummyJobName", "group1").build();
+		JobDetail job = JobBuilder.newJob(AccessAccount.class).withIdentity("dummyJobName", "group1").build();
 		Trigger trigger = TriggerBuilder
 			.newTrigger()
 			.withIdentity("dummyTriggerName", "group1")
 			.withSchedule(
 				SimpleScheduleBuilder.simpleSchedule()
-					.withIntervalInMinutes(10).repeatForever())
+					.withIntervalInMinutes(5).repeatForever())
 			.build();
 
 		// schedule it
