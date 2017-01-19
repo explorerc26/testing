@@ -12,6 +12,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
@@ -22,12 +24,29 @@ public class PrintScreen {
 
 	public static void main(String[] args) throws Exception {
 
-		System.setProperty("webdriver.chrome.driver", "C://selenium//chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
+		WebDriver driver = getIEDriver();
 		driver.get("http://www.google.com");
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		FileUtils.copyFile(scrFile, new File("c:\\op\\screenshot.png"));
-		printScreen(driver, "sample");
+		FileUtils.copyFile(scrFile, new File("c:\\test\\screenshot.png"));
+		//printScreen(driver, "sample");
+	}
+	
+	public static WebDriver getIEDriver(){
+		DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
+		caps.setCapability("ignoreZoomSetting", true);
+		System.setProperty("webdriver.ie.driver", "C://selenium//32//IEDriverServer.exe");
+		WebDriver driver = new InternetExplorerDriver(caps);
+		return driver; 
+	}
+	
+	public static WebDriver getChromeDriver(){
+		System.setProperty("webdriver.chrome.driver", "C://selenium//chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		return driver; 
+	}
+	
+	public static WebDriver getHeadLessDriver(){
+		return null; 
 	}
 
 	public static void printScreen(WebDriver driver, String policy) {
